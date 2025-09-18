@@ -8,7 +8,7 @@ LVAD Control Algorithm from Ultrasonic Flow Meter
 - Serial connectivity between pump and interface device
 
 ## Authors
-Brendan Bouchard
-Morgan Brenner
-Michaela Wittman
+Brendan Bouchard,
+Morgan Brenner,
+Michaela Wittman,
 Panagiotis Vasileiadis
