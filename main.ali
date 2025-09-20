@@ -7,12 +7,16 @@ A -march=x86-64
 P ZX
 
 RN
+RV NO_FIXED_POINT
 RV NO_IO
+RV NO_DEFAULT_INITIALIZATION
 
-U main%b		main.adb		5f1505d1 NE OO SU
+U main%b		main.adb		186198cc NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
+W gnat%s		gnat.ads		gnat.ali
+W gnat.serial_communications%s  g-sercom.adb	g-sercom.ali
 
 D ada.ads		20250425081800 76789da1 ada%s
 D a-except.ads		20250425081800 e7970cd9 ada.exceptions%s
@@ -24,13 +28,17 @@ D a-stuten.ads		20250425081800 c6ced0ae ada.strings.utf_encoding%s
 D a-tags.ads		20250425081800 fbca0ad5 ada.tags%s
 D a-textio.ads		20250425081800 34ef47de ada.text_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
+D gnat.ads		20250425081800 b5988c27 gnat%s
+D g-sercom.ads		20250425081800 55997d9d gnat.serial_communications%s
 D interfac.ads		20250425081800 9111f9c1 interfaces%s
+D i-c.ads		20250425081800 e94c966a interfaces.c%s
 D i-cstrea.ads		20250425081800 ffd01b9d interfaces.c_streams%s
-D main.adb		20250920002048 6bfa420f main%b
+D main.adb		20250920005032 7917a28f main%b
 D system.ads		20250425081800 a869df9e system%s
 D s-crtl.ads		20250425081800 beb39b9e system.crtl%s
 D s-exctab.ads		20250425081800 91bef6ef system.exception_table%s
 D s-ficobl.ads		20250425081800 dc5161d4 system.file_control_block%s
+D s-oscons.ads		20250522162642 2ab3e376 system.os_constants%s
 D s-parame.ads		20250425081800 3597fc11 system.parameters%s
 D s-putima.ads		20250425081800 17291fe4 system.put_images%s
 D s-secsta.ads		20250425081800 578279f5 system.secondary_stack%s
@@ -41,14 +49,35 @@ D s-stoele.ads		20250425081800 ccded4e8 system.storage_elements%s
 D s-traent.ads		20250425081800 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20250425081800 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20250425081800 d9032363 system.wch_con%s
+D s-win32.ads		20250425081800 f77987dc system.win32%s
 G a e
-G c Z b b [main standard 2 11 none]
+G c Z b b [main standard 23 11 none]
 X 1 ada.ads
-18K9*Ada 22e8 13|1r6 1r23
+18K9*Ada 22e8 16|20r6 20r23
 X 9 a-textio.ads
-58K13*Text_IO 785e16 13|1w10 1r27
-565U14*Put_Line 13|8s9
-X 13 main.adb
-2U11*Main 2b11 10l5 10t9
-3U19 Nested 3b19 6l13 6t19 9s9
+58K13*Text_IO 785e16 16|20w10 20r27
+565U14*Put_Line 16|41s9 45s9
+X 11 gnat.ads
+40K9*GNAT 63e9 16|21r6 21r38
+X 12 g-sercom.ads
+38K14*Serial_Communications 225e31 16|21w11 21r43
+93A9*Port_Name<string>(character)<integer>
+106n31*B115200{103E9} 16|34r25
+113n23*CS8{113E9} 16|36r25
+116n30*One{116E9} 16|37r30
+119n26*None{119E9} 16|35r27
+125R9*Serial_Port<4|39R9> 192e14 16|27r16
+132U14*Open 16|31s9
+134a7 Name{93A9} 16|31r21
+138U14*Set 16|33s9
+140e7 Rate{103E9} 16|34r17
+141e7 Bits{113E9} 16|36r17
+142e7 Stop_Bits{116E9} 16|37r17
+143e7 Parity{119E9} 16|35r17
+144b7 Block{boolean} 16|38r17
+147o7 Timeout{duration} 16|39r17
+X 16 main.adb
+23U11*Main 23b11 47l5 47t9
+25U19 Porting 25b19 43l13 43t20 46s9
+27r9 Port{12|125R9} 31m15 33r14
 
