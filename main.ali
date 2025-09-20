@@ -9,7 +9,7 @@ P ZX
 RN
 RV NO_IO
 
-U main%b		main.adb		d1ccaa48 NE OO SU
+U main%b		main.adb		5f1505d1 NE OO SU
 W ada%s			ada.ads			ada.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
@@ -26,7 +26,7 @@ D a-textio.ads		20250425081800 34ef47de ada.text_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
 D interfac.ads		20250425081800 9111f9c1 interfaces%s
 D i-cstrea.ads		20250425081800 ffd01b9d interfaces.c_streams%s
-D main.adb		20250918223818 e523ed96 main%b
+D main.adb		20250920002048 6bfa420f main%b
 D system.ads		20250425081800 a869df9e system%s
 D s-crtl.ads		20250425081800 beb39b9e system.crtl%s
 D s-exctab.ads		20250425081800 91bef6ef system.exception_table%s
@@ -47,7 +47,8 @@ X 1 ada.ads
 18K9*Ada 22e8 13|1r6 1r23
 X 9 a-textio.ads
 58K13*Text_IO 785e16 13|1w10 1r27
-565U14*Put_Line 13|4s9
+565U14*Put_Line 13|8s9
 X 13 main.adb
-2U11*Main 2b11 5l5 5t9
+2U11*Main 2b11 10l5 10t9
+3U19 Nested 3b19 6l13 6t19 9s9
 
