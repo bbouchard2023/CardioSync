@@ -14,7 +14,7 @@ RV NO_RELATIVE_DELAY
 RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 
-U csvio%b		csvio.adb		45e91e4b NE OO SU IL
+U csvio%b		csvio.adb		c3e079f8 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
@@ -32,7 +32,7 @@ D a-stuten.ads		20250425081800 c6ced0ae ada.strings.utf_encoding%s
 D a-tags.ads		20250425081800 fbca0ad5 ada.tags%s
 D a-textio.ads		20250425081800 34ef47de ada.text_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
-D csvio.adb		20250929223934 71065995 csvio%b
+D csvio.adb		20250929224736 f70f3e26 csvio%b
 D interfac.ads		20250425081800 9111f9c1 interfaces%s
 D i-cstrea.ads		20250425081800 ffd01b9d interfaces.c_streams%s
 D system.ads		20250425081800 a869df9e system%s
@@ -50,33 +50,33 @@ D s-traent.ads		20250425081800 c81cbf8c system.traceback_entries%s
 D s-unstyp.ads		20250425081800 fa2a7f59 system.unsigned_types%s
 D s-wchcon.ads		20250425081800 d9032363 system.wch_con%s
 G a e
-G c Z b b [csvio standard 3 11 none]
+G c Z b b [csvio standard 20 11 none]
 X 1 ada.ads
-18K9*Ada 22e8 13|1r6 1r23
+18K9*Ada 22e8 13|18r6 18r23
 X 11 a-textio.ads
-58K13*Text_IO 785e16 13|1w10 1r27
-67P9*File_Type 13|5r27 11r35
-69n23*In_File{69E9} 13|15r34 38r37
-115U14*Open 13|15s17 38s25
-131U14*Close 13|25s17 58s25
-341V13*End_Of_File{boolean} 13|16s27
-521U14*Get_Line 13|21s33 45s41 53s41
-565U14*Put_Line 13|31s9 54s41
+58K13*Text_IO 785e16 13|18w10 18r27
+67P9*File_Type 13|22r27 28r35
+69n23*In_File{69E9} 13|32r34 55r37
+115U14*Open 13|32s17 55s25
+131U14*Close 13|42s17 75s25
+341V13*End_Of_File{boolean} 13|33s27
+521U14*Get_Line 13|38s33 62s41 70s41
+565U14*Put_Line 13|48s9 71s41
 X 13 csvio.adb
-3U11*csvio 3b11 64l5 64t10
-5p9 File{11|67P9} 38m31 38r31 45r51 53r51 58m32 58r32
-6a9 Line{string} 53m57 54r51
-7i9 Last_Line{natural} 37r33 40r39 49r34 59m25
-8i9 Line_Count{natural} 35m17 37r20 49r51 59r38
-10V18 Count_Lines{natural} 10b18 10>31 27l13 27t24 35s31
-10a31 File_Name{string} 15r43
-11p17 Temp_File{11|67P9} 15m23 15r23 16r40 21r43 25m24 25r24
-12i17 Count{natural} 22m33 22r44 26r24
-18a33 Dummy{string} 21m54
-19i33 Len{natural} 21m61
-40i29 I{integer}
-42a41 Dummy{string} 45m57
-43i41 Len{natural} 45m64
-49i29 I{integer}
-51i41 Len{natural} 53m63 54r62
+20U11*csvio 20b11 81l5 81t10
+22p9 File{11|67P9} 55m31 55r31 62r51 70r51 75m32 75r32
+23a9 Line{string} 70m57 71r51
+24i9 Last_Line{natural} 54r33 57r39 66r34 76m25
+25i9 Line_Count{natural} 52m17 54r20 66r51 76r38
+27V18 Count_Lines{natural} 27b18 27>31 44l13 44t24 52s31
+27a31 File_Name{string} 32r43
+28p17 Temp_File{11|67P9} 32m23 32r23 33r40 38r43 42m24 42r24
+29i17 Count{natural} 39m33 39r44 43r24
+35a33 Dummy{string} 38m54
+36i33 Len{natural} 38m61
+57i29 I{integer}
+59a41 Dummy{string} 62m57
+60i41 Len{natural} 62m64
+66i29 I{integer}
+68i41 Len{natural} 70m63 71r62
 
