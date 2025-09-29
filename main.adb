@@ -41,6 +41,7 @@ procedure Main is
 	Put_Line ("Serial Port open and configured.");
 	
 	end Porting;
+	
 begin
 	Put_Line ("Hello World!");
 	Porting;
