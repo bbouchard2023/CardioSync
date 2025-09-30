@@ -45,14 +45,14 @@ procedure csvio is
 
 begin
 
-	Put_Line ("Reading file: test.csv");
+	Put_Line ("Reading file: ufmoutput.csv");
 	
 	loop
 	
-		Line_Count := Count_Lines ("C:\Users\bbouchard2023\cardiosync\control-algorithm\csvio\ufminput.csv");
+		Line_Count := Count_Lines ("ufmoutput.csv");
 		
 		if Line_Count > Last_Line then
-			Open (File, In_File, "C:\Users\bbouchard2023\cardiosync\control-algorithm\csvio\ufminput.csv");
+			Open (File, In_File, "ufmoutput.csv");
 			
 			for I in 1 .. Last_Line loop
 				declare

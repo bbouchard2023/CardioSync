@@ -14,7 +14,7 @@ RV NO_RELATIVE_DELAY
 RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 
-U csvio%b		csvio.adb		c3e079f8 NE OO SU IL
+U csvio%b		csvio.adb		f400fc05 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
@@ -32,7 +32,7 @@ D a-stuten.ads		20250425081800 c6ced0ae ada.strings.utf_encoding%s
 D a-tags.ads		20250425081800 fbca0ad5 ada.tags%s
 D a-textio.ads		20250425081800 34ef47de ada.text_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
-D csvio.adb		20250929224736 f70f3e26 csvio%b
+D csvio.adb		20250930165418 c0efbbdb csvio%b
 D interfac.ads		20250425081800 9111f9c1 interfaces%s
 D i-cstrea.ads		20250425081800 ffd01b9d interfaces.c_streams%s
 D system.ads		20250425081800 a869df9e system%s
