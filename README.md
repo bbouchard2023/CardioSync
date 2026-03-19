@@ -1,6 +1,4 @@
-\#Front End
-
-\_\_\_
+\# Front End
 
 
 
@@ -8,9 +6,7 @@ This module allows user interaction with the control algorithm to set initial va
 
 
 
-\##Contributors
-
-\_\_\_
+\## Contributors
 
 
 
