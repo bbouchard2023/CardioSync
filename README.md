@@ -1,4 +1,4 @@
-\# Front End
+\#Front End
 
 \_\_\_
 
@@ -8,13 +8,11 @@ This module allows user interaction with the control algorithm to set initial va
 
 
 
-\## Contributors
+\##Contributors
 
 \_\_\_
 
 
 
 Morgan Brenner, Brendan Bouchard
-
-
 
