@@ -1,16 +1,10 @@
-\# Control Algorithm
-
-\_\_\_
-
-
+# Control Algorithm
 
 This module implements the PID control algorithm for ensuring optimal hemodynamics when implemented with an LVAD.
 
 
 
-\## Contributors
-
-\_\_\_
+## Contributors
 
 
 Brendan Bouchard
