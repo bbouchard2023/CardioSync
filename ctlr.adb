@@ -14,17 +14,16 @@
 -- Created: 20260319
 -- Last Edited: 20260319
 with Ada.Text_IO; use Ada.Text_IO;
-with Ada.Streams;
-     with GNAT.Serial_Communications;
+with Ada.Streams; 
+with GNAT.Serial_Communications;
    
      procedure ctlr is
         use Ada.Streams;
         use GNAT;
    
-        subtype Message is Stream_Element_Array (1 .. 20);
-   
-        Data   : constant String (1 .. 6)  := "16#05#";
-        Buffer : Message;
+		subtype Message is Stream_Element_Array (1 .. 20);
+        Data   	: constant String (1 .. 20)  := "ABCDEFGHIJLKMNOPQRST";
+        Buffer 	: Message;
 		
 		Last   : Stream_Element_Offset;
 		
@@ -42,32 +41,34 @@ with Ada.Streams;
            Port      : Serial_Communications.Serial_Port;
    
         begin
-           Serial_Communications.Open
-             (Port => Port,
-              Name => Port_Name);
-   
-           Serial_Communications.Set
-             (Port      => Port,
-              Rate      => Serial_Communications.B4800,
-              Bits      => Serial_Communications.CS7,
-              Stop_Bits => Serial_Communications.One,
-              Parity    => Serial_Communications.Odd);
-   
-           Serial_Communications.Write
-             (Port   => Port,
-              Buffer => Buffer);
-              
-              delay 0.1;
-              
-           Serial_Communications.Read
+			Serial_Communications.Open
+			 (Port => Port,
+			  Name => Port_Name);
+
+			Serial_Communications.Set
+			 (Port      => Port,
+			  Rate      => Serial_Communications.B4800,
+			  Bits      => Serial_Communications.CS7,
+			  Stop_Bits => Serial_Communications.One,
+			  Parity    => Serial_Communications.Odd);
+
+			
+			Serial_Communications.Write
+			 (Port   => Port,
+			  Buffer => Buffer);
+
+			  delay 0.1;
+			  
+			Serial_Communications.Read
 			(Port => Port,
 			 Buffer => Buffer,
 			 Last => Last);
 			for I in 1 .. Last loop
-				Put (Stream_Element'Image(Buffer(I)) & " ");
+				Put (Stream_Element'Image(Buffer(I)));
+				New_Line;
 			end	loop;
-   
-           Serial_Communications.Close
-             (Port => Port);
+
+			Serial_Communications.Close
+			 (Port => Port);
         end;
      end ctlr;
