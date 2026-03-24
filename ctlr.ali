@@ -16,7 +16,7 @@ RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
 
-U ctlr%b		ctlr.adb		834b9e96 NE OO SU IL
+U ctlr%b		ctlr.adb		4d5064a0 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
@@ -40,7 +40,7 @@ D a-stuten.ads		20250425081800 c6ced0ae ada.strings.utf_encoding%s
 D a-tags.ads		20250425081800 fbca0ad5 ada.tags%s
 D a-textio.ads		20250425081800 34ef47de ada.text_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
-D ctlr.adb		20260320022846 f57ad868 ctlr%b
+D ctlr.adb		20260324191446 3b61225e ctlr%b
 D gnat.ads		20250425081800 b5988c27 gnat%s
 D g-sercom.ads		20250425081800 55997d9d gnat.serial_communications%s
 D interfac.ads		20250425081800 9111f9c1 interfaces%s
@@ -68,59 +68,56 @@ D s-vs_uns.ads		20250425081800 e7f47a27 system.vs_uns%s
 D s-wchcon.ads		20250425081800 d9032363 system.wch_con%s
 D s-win32.ads		20250425081800 f77987dc system.win32%s
 G a e
-G c Z b b [ctlr standard 20 16 none]
+G c Z b b [ctlr standard 20 11 none]
 X 1 ada.ads
 18K9*Ada 22e8 13|16r6 16r23 17r6 21r13
 X 6 a-stream.ads
 36K13*Streams 90e16 13|17w10 21r17
-42M9*Stream_Element 13|69r38
-44I9*Stream_Element_Offset<long_long_integer> 13|30r26 37r20
-54A9*Stream_Element_Array(42M9)<44I9> 13|24r36
+42M9*Stream_Element 13|73r30
+44I9*Stream_Element_Offset<long_long_integer> 13|36r18
+54A9*Stream_Element_Array(42M9)<44I9> 13|28r28 29r28
 X 11 a-textio.ads
 58K13*Text_IO 785e16 13|16w10 16r27
-284U14*New_Line 13|70s33
-515U14*Put 13|69s33
+284U14*New_Line 13|74s25
+515U14*Put 13|73s25
 X 13 ctlr.adb
-20U16*ctlr 20b16 76l10 76t14
-24A25 Message{6|54A9}<6|44I9> 26r19
-25a9 Data{string} 36r18 37r65
-26a9 Buffer{24A25} 37m12 60r37 66m36 69r59
-27a9 Input{string}
-28i9 Final{integer}
-30i17 Last{6|44I9} 67m34 68r39
-32i9 S_Port{natural} 42r54
-36i13 K{integer} 37r43 37r71
-41a12 Port_Name{15|93A9} 48r35
-43r12 Port{15|125R9} 47m35 51r40 59m37 59r37 65m34 65r34 74m35 74r35
-68i29 I<long_long_integer> 69r66
+20U11*ctlr 20b11 80l5 80t9
+28A17 Message{6|54A9}<6|44I9> 34r19
+29a9 Data{6|54A9} 63r29
+34a9 Buffer{28A17} 69m28 73r51
+36i9 Last{6|44I9} 70m26 72r31
+38i9 S_Port{natural} 45r70
+44a12 Port_Name{15|93A9} 51r27
+46r12 Port{15|125R9} 50m27 54r32 62m29 62r29 68m26 68r26 78m27 78r27
+72i21 I<long_long_integer> 73r58
 X 14 gnat.ads
 40K9*GNAT 13|18r6 22r13 14|63e9
 X 15 g-sercom.ads
-38K14*Serial_Communications 13|18w11 41r33 42r26 43r24 46r25 50r25 52r40
-. 53r40 54r40 55r40 58r25 64r25 73r25 15|225e31
-93A9*Port_Name<string>(character)<integer> 13|41r55
-96V13*Name{93A9} 13|42s48
-105n14*B4800{103E9} 13|52r62
-113n28*CS7{113E9} 13|53r62
-116n30*One{116E9} 13|54r62
-119n38*Odd{119E9} 13|55r62
-125R9*Serial_Port<6|39R9> 13|43r46 15|192e14
-132U14*Open 13|46s47
-133r7 Port{125R9} 13|47r27
-134a7 Name{93A9} 13|48r27
-138U14*Set 13|50s47
-139r7 Port{125R9} 13|51r27
-140e7 Rate{103E9} 13|52r27
-141e7 Bits{113E9} 13|53r27
-142e7 Stop_Bits{116E9} 13|54r27
-143e7 Parity{119E9} 13|55r27
-160U25*Read<6|57p14> 13|64s47
-161r7 Port{125R9} 13|65r26
-162a7 Buffer{6|54A9} 13|66r26
-163i7 Last{6|44I9} 13|67r26
-169U25*Write<6|63p14> 13|58s47
-170r7 Port{125R9} 13|59r27
-171a7 Buffer{6|54A9} 13|60r27
-174U14*Close 13|73s47
-174r21 Port{125R9} 13|74r27
+38K14*Serial_Communications 13|18w11 44r33 45r42 46r24 49r17 53r17 55r32
+. 56r32 57r32 58r32 61r17 67r17 77r17 15|225e31
+93A9*Port_Name<string>(character)<integer> 13|44r55
+96V13*Name{93A9} 13|45s64
+105n14*B4800{103E9} 13|55r54
+113n28*CS7{113E9} 13|56r54
+116n30*One{116E9} 13|57r54
+119n38*Odd{119E9} 13|58r54
+125R9*Serial_Port<6|39R9> 13|46r46 15|192e14
+132U14*Open 13|49s39
+133r7 Port{125R9} 13|50r19
+134a7 Name{93A9} 13|51r19
+138U14*Set 13|53s39
+139r7 Port{125R9} 13|54r19
+140e7 Rate{103E9} 13|55r19
+141e7 Bits{113E9} 13|56r19
+142e7 Stop_Bits{116E9} 13|57r19
+143e7 Parity{119E9} 13|58r19
+160U25*Read<6|57p14> 13|67s39
+161r7 Port{125R9} 13|68r18
+162a7 Buffer{6|54A9} 13|69r18
+163i7 Last{6|44I9} 13|70r18
+169U25*Write<6|63p14> 13|61s39
+170r7 Port{125R9} 13|62r19
+171a7 Buffer{6|54A9} 13|63r19
+174U14*Close 13|77s39
+174r21 Port{125R9} 13|78r19
 
