@@ -25,11 +25,61 @@ procedure ctlr is
 	
 	
 	
-	subtype Message is Stream_Element_Array (1 .. 3);
-	Data   	: constant Stream_Element_Array  := (
-	1 => 16#02#,
-	2 => 16#05#,
-	3 => 16#13#
+	subtype Message is Stream_Element_Array (1 .. 40);
+	
+	Enquiry			: constant Stream_Element_Array := ( -- Sends an enquiry (checks if the pump is connected)
+		1 => 16#02#, -- STX
+		2 => 16#05#, -- ENQ
+		3 => 16#0D# -- CR
+	);
+	
+	Numeration   	: constant Stream_Element_Array  := ( -- Sets the pump's number (P01)
+		1 => 16#02#, -- STX
+		2 => 16#50#, -- P
+		3 => 16#30#, -- 0
+		4 => 16#31#, -- 1
+		5 => 16#0D# -- CR
+	);
+	
+	ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
+		1 => 16#02#, -- STX
+		2 => 16#50#, -- P
+		3 => 16#30#, -- 0
+		4 => 16#31#, -- 1
+		5 => 16#53#, -- S
+		6 => 16#2B#, -- +
+		7 => 16#30#, -- 0
+		8 => 16#31#, -- 1
+		9 => 16#30#, -- 0
+		10 => 16#30#, -- 0
+		11 => 16#2E#, -- .
+		12 => 16#30#, -- 0
+		13 => 16#56#, -- V
+		14 => 16#33#, -- 3
+		15 => 16#30#, -- 0
+		16 => 16#30#, -- 0
+		17 => 16#2E#, -- .
+		18 => 16#30#, -- 0
+		19 => 16#47#, -- G
+		20 => 16#0D# -- CR
+	);
+	
+	StatusCheck		: constant Stream_Element_Array := ( -- Checks the pump's status after running controls
+		1 => 16#02#, -- STX
+		2 => 16#50#, -- P
+		3 => 16#30#, -- 0
+		4 => 16#31#, -- 1
+		5 => 16#69#, -- I
+		6 => 16#0D# -- CR
+	);
+	
+	StopSignal		: constant Stream_Element_Array := (
+		1 => 16#02#, -- STX
+		2 => 16#50#, -- P
+		3 => 16#30#, -- 0
+		4 => 16#31#, -- 1
+		5 => 16#68#, -- H
+		6 => 16#0D# -- CR
 	);
 	Buffer 	: Message;
 
@@ -57,22 +107,47 @@ begin
 		  Stop_Bits => Serial_Communications.One,
 		  Parity    => Serial_Communications.Odd);
 
-
 		Serial_Communications.Write
 		 (Port   => Port,
-		  Buffer => Data);
+		  Buffer => Enquiry);
+		  
+		  delay 0.1;
+		  
+		Serial_Communications.Write
+		 (Port   => Port,
+		  Buffer => Numeration);
+
+		  delay 0.5;
+		  
+		Serial_Communications.Write
+		 (Port   => Port,
+		  Buffer => ControlInput);
 
 		  delay 0.1;
+		  
+		Serial_Communications.Write
+		 (Port   => Port,
+		  Buffer => StatusCheck);
+		  
+		  delay 0.4;
 
 		Serial_Communications.Read
 		(Port => Port,
 		 Buffer => Buffer,
 		 Last => Last);
+		 
+		
 		
 		for I in 1 .. Last loop
 			Put (Stream_Element'Image(Buffer(I)));
 			New_Line;
 		end	loop;
+		
+		delay 10.0;
+		
+		Serial_Communications.Write
+		 (Port   => Port,
+		  Buffer => StopSignal);
 
 		Serial_Communications.Close
 		 (Port => Port);
