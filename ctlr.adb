@@ -26,6 +26,8 @@ procedure ctlr is
 	arg1	: constant String := Ada.Command_Line.Argument(1);
 	RPM 	: Stream_Element_Array (1 .. arg1'Length);	
 	
+	EndPrompt		: String (1 .. 3);
+	EndPromptLength : Natural;
 
 	subtype Message is Stream_Element_Array (1 .. 11);
 	
@@ -48,18 +50,18 @@ begin
 		Port      		: Serial_Communications.Serial_Port;
 		
 		ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
-			1 => 16#02#, -- STX
+			1 => 16#02#, -- STX (start text)
 			2 => 16#50#, -- P
 			3 => 16#30#, -- 0
 			4 => 16#31#, -- 1
-			5 => 16#53#, -- S
-			6 => 16#2B#, -- +
+			5 => 16#53#, -- S (speed)
+			6 => 16#2B#, -- + (clockwise rotation)
 			7 => 16#30#, -- 0
-			8 => RPM (1), -- 1
-			9 => RPM (2), -- 0
-			10 => RPM (3), -- 0
-			11 => RPM (4), -- .
-			12 => RPM (5), -- 0
+			8 => RPM (1), -- input digit 1
+			9 => RPM (2), -- input digit 2
+			10 => RPM (3), -- input digit 3
+			11 => RPM (4), -- input decimal
+			12 => RPM (5), -- input digit 4
 			13 => 16#47#, -- G
 			14 => 16#0D# -- CR
 		);
@@ -145,8 +147,12 @@ begin
 			New_Line;
 		end	loop;
 		
-		delay 5.0; -- Length the pump runs
 		
+		--~ delay 5.0; -- Length the pump runs
+		Put ("Type 'end' to end program: ");
+		Get_Line (EndPrompt, EndPromptLength);
+		
+		if EndPrompt = "end" then
 		Serial_Communications.Write -- Sends the pump the stop signal
 		 (Port   => Port,
 		  Buffer => StopSignal);
@@ -155,5 +161,6 @@ begin
 		
 		Serial_Communications.Close -- Closes the serial port
 		 (Port => Port);
+		end if;
 	end;
 end ctlr;
