@@ -12,7 +12,7 @@
 --
 --
 -- Created: 20260319
--- Last Edited: 20260324
+-- Last Edited: 20260325
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Streams;
 with GNAT.Serial_Communications;
@@ -23,13 +23,13 @@ procedure ctlr is
 	use GNAT;
 
 	
-	arg1	: constant String := Ada.Command_Line.Argument(1);
-	RPM 	: Stream_Element_Array (1 .. arg1'Length);	
+	arg1	: constant String := Ada.Command_Line.Argument(1); -- Takes the first argument from the command line when executed (RPM)
+	RPM 	: Stream_Element_Array (1 .. arg1'Length);	-- Defines the stream element array for the RPM to be input into ControlInput
 	
 	EndPrompt		: String (1 .. 3);
 	EndPromptLength : Natural;
 
-	subtype Message is Stream_Element_Array (1 .. 11);
+	subtype Message is Stream_Element_Array (1 .. 11); -- Defines a stream element array subtype for reading the buffer in the Serial_Communications.Read call
 	
 	
 	
@@ -41,13 +41,13 @@ procedure ctlr is
 begin
 	
 	for I in arg1'Range loop
-		RPM (Stream_Element_Offset(I)) := Stream_Element(Character'Pos(arg1(I)));
+		RPM (Stream_Element_Offset(I)) := Stream_Element(Character'Pos(arg1(I))); -- Transforms String type from the first argument to Stream_Element type
 	end loop;
 	
 	
 	declare
-		Port_Name 		: constant Serial_Communications.Port_Name := Serial_Communications.Name (S_Port);
-		Port      		: Serial_Communications.Serial_Port;
+		Port_Name 		: constant Serial_Communications.Port_Name := Serial_Communications.Name (S_Port); -- Defines the serial port name
+		Port      		: Serial_Communications.Serial_Port; -- Defines Serial_Port from the Serial_Communications package as "Port"
 		
 		ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
 			1 => 16#02#, -- STX (start text)
