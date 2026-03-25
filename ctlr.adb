@@ -44,9 +44,8 @@ begin
 	
 	
 	declare
-	   Port_Name : constant Serial_Communications.Port_Name :=
-					 Serial_Communications.Name (S_Port);
-	   Port      : Serial_Communications.Serial_Port;
+		Port_Name 		: constant Serial_Communications.Port_Name := Serial_Communications.Name (S_Port);
+		Port      		: Serial_Communications.Serial_Port;
 		
 		ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
 			1 => 16#02#, -- STX
@@ -59,8 +58,8 @@ begin
 			8 => RPM (1), -- 1
 			9 => RPM (2), -- 0
 			10 => RPM (3), -- 0
-			11 => 16#2E#, -- .
-			12 => 16#30#, -- 0
+			11 => RPM (4), -- .
+			12 => RPM (5), -- 0
 			13 => 16#47#, -- G
 			14 => 16#0D# -- CR
 		);
