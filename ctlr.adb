@@ -16,72 +16,20 @@
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Streams;
 with GNAT.Serial_Communications;
+with Ada.Command_Line;
 
 procedure ctlr is
 	use Ada.Streams;
 	use GNAT;
 
 	
+	arg1	: constant String := Ada.Command_Line.Argument(1);
+	RPM 	: Stream_Element_Array (1 .. arg1'Length);	
 	
-	
-	
+
 	subtype Message is Stream_Element_Array (1 .. 11);
 	
-	Enquiry			: constant Stream_Element_Array := ( -- Sends an enquiry (checks if the pump is connected)
-		1 => 16#02#, -- STX
-		2 => 16#05#, -- ENQ
-		3 => 16#0D# -- CR
-	);
 	
-	
-	Numeration   	: constant Stream_Element_Array  := ( -- Sets the pump's number (P01)
-		1 => 16#02#, -- STX
-		2 => 16#50#, -- P
-		3 => 16#30#, -- 0
-		4 => 16#31#, -- 1
-		5 => 16#0D# -- CR
-	);
-	
-	ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
-		1 => 16#02#, -- STX
-		2 => 16#50#, -- P
-		3 => 16#30#, -- 0
-		4 => 16#31#, -- 1
-		5 => 16#53#, -- S
-		6 => 16#2B#, -- +
-		7 => 16#30#, -- 0
-		8 => 16#31#, -- 1
-		9 => 16#30#, -- 0
-		10 => 16#30#, -- 0
-		11 => 16#2E#, -- .
-		12 => 16#30#, -- 0
-		13 => 16#56#, -- V
-		14 => 16#33#, -- 3
-		15 => 16#30#, -- 0
-		16 => 16#30#, -- 0
-		17 => 16#2E#, -- .
-		18 => 16#30#, -- 0
-		19 => 16#47#, -- G
-		20 => 16#0D# -- CR
-	);
-	
-	StatusCheck		: constant Stream_Element_Array := ( -- Checks the pump's status after running controls
-		1 => 16#02#, -- STX
-		2 => 16#50#, -- P
-		3 => 16#30#, -- 0
-		4 => 16#31#, -- 1
-		5 => 16#49#, -- I
-		6 => 16#0D# -- CR
-	);
-	
-	StopSignal		: constant Stream_Element_Array := ( -- Tells the pump to stop
-		1 => 16#02#, -- STX
-		2 => 16#50#, -- P
-		3 => 16#30#, -- 0
-		4 => 16#31#, -- 1
-		5 => 16#48#, -- H
-		6 => 16#0D# -- CR
-	);
 	
 	Buffer	: Message; -- Sets up the buffer for reading the StatusCheck
 	Last	: Stream_Element_Offset; -- Sets the endpoint for the Buffer
@@ -89,13 +37,69 @@ procedure ctlr is
 	S_Port	: constant Natural := 1; -- defines the serial port name ("COM<S_Port>") 
 
 begin
-
-
+	
+	for I in arg1'Range loop
+		RPM (Stream_Element_Offset(I)) := Stream_Element(Character'Pos(arg1(I)));
+	end loop;
+	
+	
 	declare
 	   Port_Name : constant Serial_Communications.Port_Name :=
 					 Serial_Communications.Name (S_Port);
 	   Port      : Serial_Communications.Serial_Port;
-
+		
+		ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
+			1 => 16#02#, -- STX
+			2 => 16#50#, -- P
+			3 => 16#30#, -- 0
+			4 => 16#31#, -- 1
+			5 => 16#53#, -- S
+			6 => 16#2B#, -- +
+			7 => 16#30#, -- 0
+			8 => RPM (1), -- 1
+			9 => RPM (2), -- 0
+			10 => RPM (3), -- 0
+			11 => 16#2E#, -- .
+			12 => 16#30#, -- 0
+			13 => 16#47#, -- G
+			14 => 16#0D# -- CR
+		);
+		
+		Enquiry			: constant Stream_Element_Array := ( -- Sends an enquiry (checks if the pump is connected)
+			1 => 16#02#, -- STX
+			2 => 16#05#, -- ENQ
+			3 => 16#0D# -- CR
+		);
+		
+		
+		Numeration   	: constant Stream_Element_Array  := ( -- Sets the pump's number (P01)
+			1 => 16#02#, -- STX
+			2 => 16#50#, -- P
+			3 => 16#30#, -- 0
+			4 => 16#31#, -- 1
+			5 => 16#0D# -- CR
+		);
+		
+		
+		
+		StatusCheck		: constant Stream_Element_Array := ( -- Checks the pump's status after running controls
+			1 => 16#02#, -- STX
+			2 => 16#50#, -- P
+			3 => 16#30#, -- 0
+			4 => 16#31#, -- 1
+			5 => 16#49#, -- I
+			6 => 16#0D# -- CR
+		);
+		
+		StopSignal		: constant Stream_Element_Array := ( -- Tells the pump to stop
+			1 => 16#02#, -- STX
+			2 => 16#50#, -- P
+			3 => 16#30#, -- 0
+			4 => 16#31#, -- 1
+			5 => 16#48#, -- H
+			6 => 16#0D# -- CR
+		);
+	
 	begin
 		Serial_Communications.Open -- Opens the serial port
 		 (Port => Port,
