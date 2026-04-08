@@ -95,12 +95,13 @@ elif statstr[9] == "5":
 
 
 
-time.sleep(5)
+exitprompt = input("Type 'end' to stop program: ")
 
-check =  send_and_receive(bytes([0x02]) + b'P01H' + bytes([0x0D]))
+if exitprompt == "end":
+    check =  send_and_receive(bytes([0x02]) + b'P01H' + bytes([0x0D]))
 
-if check == b'\x06':
-    print("PUMP SUCESSFULLY CLOSED\n")
-
-ser.close()
+    if check == b'\x06':
+        print("PUMP SUCESSFULLY CLOSED\n")
+    
+    ser.close()
 
