@@ -161,12 +161,22 @@ begin
 			6 => 16#0D# -- CR
 		);
 	
+		task type ControlUpdate is
+			entry ControlBegin;
+		end ControlUpdate;
 		
-		  
+		task body ControlUpdate is
+		begin
+			accept ControlBegin;
+			-- <shit it does>
+			Put_Line ("It works");
+		end ControlUpdate;
 		 
-		  
+		 PumpUpdate	: ControlUpdate;
 		  
 	begin
+		
+		
 		Serial_Communications.Open -- Opens the serial port
 		 (Port => Port,
 		  Name => Port_Name);
@@ -200,8 +210,6 @@ begin
 		 (Port   => Port,
 		  Buffer => StatusCheck);
 		  
-		
-		  
 		  delay 0.1;
 
 		Serial_Communications.Read -- Reads the pump's response to the StatusCheck
@@ -209,10 +217,13 @@ begin
 		 Buffer => Buffer,
 		 Last => Last);
 		
+		
 		for I in 1 .. Last loop
 			Put (Stream_Element'Image(Buffer(I))); -- Prints the output from Read into the cmd prompt
 			New_Line;
 		end	loop;
+		
+		PumpUpdate.ControlBegin;
 				
 		Put ("Type 'end' to end program: ");
 		Get_Line (EndPrompt, EndPromptLength);
