@@ -168,8 +168,21 @@ begin
 		task body ControlUpdate is
 		begin
 			accept ControlBegin;
-			-- <shit it does>
-			Put_Line ("It works");
+			declare
+					--~ K_Proportional	: Natural;
+					--~ K_Integral		: Natural;
+					--~ K_Derivative	: Natural;
+					--~ Q_Desired		: Natural;
+					--~ Q_Actual		: Natural;
+			begin	
+				loop
+					exit when Stop;
+					
+					
+					
+				end loop;
+				Put_Line ("It works");
+			end;
 		end ControlUpdate;
 		 
 		 PumpUpdate	: ControlUpdate;
