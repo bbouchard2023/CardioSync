@@ -29,6 +29,8 @@ procedure ctlr is
 	
 	arg1	: constant String := Ada.Command_Line.Argument(1); -- Takes the first argument from the command line when executed (RPM)
 	RPM 	: Stream_Element_Array (1 .. arg1'Length);	-- Defines the stream element array for the RPM to be input into ControlInput
+	arg2	: constant String := Ada.Command_Line.Argument(2);
+	DesiredFlow : constant Float := Float'Value(arg2);
 	
 	EndPrompt		: String (1 .. 3); -- preallocates the end prompt
 	EndPromptLength : Natural; -- defines the length of the end prompt as a number
@@ -169,11 +171,11 @@ begin
 		begin
 			accept ControlBegin;
 			declare
-					--~ K_Proportional	: Natural;
-					--~ K_Integral		: Natural;
-					--~ K_Derivative	: Natural;
-					--~ Q_Desired		: Natural;
-					--~ Q_Actual		: Natural;
+					K_Proportional	: Float := 1.0;
+					K_Integral		: Float := 1.0;
+					K_Derivative	: Float := 1.0;
+					Q_Desired		: Float := DesiredFlow;
+					Q_Actual		: Float;
 			begin	
 				loop
 					exit when Stop;
