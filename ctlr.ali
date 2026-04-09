@@ -8,13 +8,10 @@ P SS ZX
 
 RN
 RV NO_DELAY
-RV NO_EXCEPTION_HANDLERS
-RV NO_EXCEPTIONS
 RV NO_FIXED_POINT
 RV NO_FLOATING_POINT
 RV NO_IO
 RV NO_IMPLICIT_CONDITIONALS
-RV NO_NESTED_FINALIZATION
 RV NO_RELATIVE_DELAY
 RV NO_SECONDARY_STACK
 RV NO_STANDARD_STORAGE_POOLS
@@ -22,32 +19,28 @@ RV NO_TASK_HIERARCHY
 RV NO_TASKING
 RV NO_DEFAULT_INITIALIZATION
 RV NO_DYNAMIC_SIZED_OBJECTS
-RV NO_OBSOLESCENT_FEATURES
 RV MAX_TASK_ENTRIES=1
 RV MAX_TASKS=1+
 
-U ctlr%b		ctlr.adb		cf65017c NE OO SU IL
+U ctlr%b		ctlr.adb		e0508891 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 W ada.command_line%s	a-comlin.adb		a-comlin.ali
 W ada.directories%s	a-direct.adb		a-direct.ali
-Z ada.exceptions%s	a-except.adb		a-except.ali
+W ada.float_text_io%s	a-flteio.ads		a-flteio.ali
 Z ada.real_time%s	a-reatim.adb		a-reatim.ali
 W ada.streams%s		a-stream.adb		a-stream.ali
-W ada.strings%s		a-string.ads		a-string.ali
 Z ada.strings.text_buffers%s  a-sttebu.adb	a-sttebu.ali
-W ada.strings.unbounded%s  a-strunb.adb		a-strunb.ali
 W ada.text_io%s		a-textio.adb		a-textio.ali
 W gnat%s		gnat.ads		gnat.ali
 W gnat.os_lib%s		g-os_lib.ads		g-os_lib.ali
 W gnat.serial_communications%s  g-sercom.adb	g-sercom.ali
 Z system%s		system.ads		system.ali
-Z system.finalization_primitives%s  s-finpri.adb  s-finpri.ali
+Z system.img_flt%s	s-imgflt.ads		s-imgflt.ali
 Z system.img_uns%s	s-imguns.ads		s-imguns.ali
 Z system.parameters%s	s-parame.adb		s-parame.ali
 Z system.secondary_stack%s  s-secsta.adb	s-secsta.ali
 Z system.soft_links%s	s-soflin.adb		s-soflin.ali
-Z system.standard_library%s  s-stalib.adb	s-stalib.ali
 Z system.task_info%s	s-tasinf.adb		s-tasinf.ali
 Z system.tasking%s	s-taskin.adb		s-taskin.ali
 Z system.tasking.rendezvous%s  s-tasren.adb	s-tasren.ali
@@ -64,6 +57,7 @@ D a-comlin.ads		20250425081800 4aa66568 ada.command_line%s
 D a-direct.ads		20250425081800 467e87a1 ada.directories%s
 D a-except.ads		20250425081800 e7970cd9 ada.exceptions%s
 D a-finali.ads		20250425081800 bf4f806b ada.finalization%s
+D a-flteio.ads		20250425081800 e18a47a0 ada.float_text_io%s
 D a-ioexce.ads		20250425081800 40018c65 ada.io_exceptions%s
 D a-reatim.ads		20250425081800 d11673fd ada.real_time%s
 D a-stream.ads		20250425081800 17477cbd ada.streams%s
@@ -75,9 +69,10 @@ D a-strunb.ads		20250425081800 b10770ab ada.strings.unbounded%s
 D a-stuten.ads		20250425081800 c6ced0ae ada.strings.utf_encoding%s
 D a-tags.ads		20250425081800 fbca0ad5 ada.tags%s
 D a-textio.ads		20250425081800 34ef47de ada.text_io%s
+D a-tiflio.ads		20250425081800 48a0360d ada.text_io.float_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
 D a-uncdea.ads		20250425081800 c3a8ac65 ada.unchecked_deallocation%s
-D ctlr.adb		20260408025406 093c90c3 ctlr%b
+D ctlr.adb		20260409223414 76842e25 ctlr%b
 D gnat.ads		20250425081800 b5988c27 gnat%s
 D g-os_lib.ads		20250425081800 0db74523 gnat.os_lib%s
 D g-sercom.ads		20250425081800 55997d9d gnat.serial_communications%s
@@ -93,9 +88,10 @@ D s-exctab.ads		20250425081800 91bef6ef system.exception_table%s
 D s-ficobl.ads		20250425081800 dc5161d4 system.file_control_block%s
 D s-finpri.ads		20250425081800 5970d55a system.finalization_primitives%s
 D s-finroo.ads		20250425081800 0a7c3ed4 system.finalization_root%s
+D s-imager.ads		20250425081800 45c7157d system.image_r%s
 D s-imageu.ads		20250425081800 b0b50650 system.image_u%s
+D s-imgflt.ads		20250425081800 d12816b5 system.img_flt%s
 D s-imguns.ads		20250425081800 c4e23690 system.img_uns%s
-D s-memory.ads		20250425081800 18949c1a system.memory%s
 D s-multip.ads		20250425081800 38ac9f73 system.multiprocessors%s
 D s-oscons.ads		20250522162642 2ab3e376 system.os_constants%s
 D s-osinte.ads		20250425081800 35a74841 system.os_interface%s
@@ -110,7 +106,6 @@ D s-soflin.ads		20250425081800 5d88fdea system.soft_links%s
 D s-stache.ads		20250425081800 0b81c1fe system.stack_checking%s
 D s-stausa.ads		20250425081800 5be75682 system.stack_usage%s
 D s-stalib.ads		20250425081800 1c9580f6 system.standard_library%s
-D s-stalib.adb		20250425081800 eb464a47 system.standard_library%b
 D s-stoele.ads		20250425081800 ccded4e8 system.storage_elements%s
 D s-stratt.ads		20250425081800 516607ae system.stream_attributes%s
 D s-string.ads		20250425081800 582aac7d system.strings%s
@@ -132,139 +127,137 @@ D s-vs_uns.ads		20250425081800 e7f47a27 system.vs_uns%s
 D s-wchcon.ads		20250425081800 d9032363 system.wch_con%s
 D s-win32.ads		20250425081800 f77987dc system.win32%s
 G a e
-G c Z b b [ctlr standard 24 11 none]
+G c Z b b [ctlr standard 25 11 none]
 X 1 ada.ads
-18K9*Ada 22e8 23|16r6 16r23 17r6 19r6 21r6 22r6 22r33 25r13 30r38 32r38 64r28
-. 265r17
+18K9*Ada 22e8 25|16r6 16r23 17r6 19r6 21r6 22r6 26r13 29r38 31r38 65r28 79r57
+. 306r17
 X 6 a-comlin.ads
-40K13*Command_Line 148e21 23|19w10 30r42 32r42
-56V13*Argument{string} 23|30s55 32s55
+40K13*Command_Line 148e21 25|19w10 29r42 31r42
+56V13*Argument{string} 25|29s55 31s55
 X 7 a-direct.ads
-76K13*Directories 524e20 23|21w10 64r32 265r21
-147U14*Delete_File 23|265s33
-310V13*Exists{boolean} 23|64s44
-X 12 a-stream.ads
-36K13*Streams 90e16 23|17w10 25r17
-42M9*Stream_Element 23|105r51 237r30
-44I9*Stream_Element_Offset<long_long_integer> 23|43r19 105r22
-54A9*Stream_Element_Array(42M9)<44I9> 23|31r19 38r28 113r44 131r52 138r44
-. 148r52 157r52
-X 13 a-string.ads
-16K13*Strings 35e16 23|22r10 22r37
-X 17 a-strunb.ads
-91K21*Unbounded 1641e26 23|22w18 22r45
-105R9*Unbounded_String<9|43R9> 1620e15 23|28r27
-109r4*Null_Unbounded_String{105R9} 23|28r47
-122V13*To_Unbounded_String{105R9} 23|78s82 78s130
-135V13*To_String{string} 23|79s67
-177V14*"&"{105R9} 23|78s80 78s128
-X 20 a-textio.ads
-58K13*Text_IO 785e16 23|16w10 16r27
-67P9*File_Type 23|66r59 98r27
-69n23*In_File{69E9} 23|72r57
-69n32*Out_File{69E9} 23|248r52
-99U14*Create 23|248s34
-115U14*Open 23|72s41
-131U14*Close 23|83s41 250s34
-284U14*New_Line 23|238s25
-341V13*End_Of_File{boolean} 23|74s51
-515U14*Put 23|237s25 243s17
-521U14*Get_Line 23|75s49
-535U14*Get_Line 23|244s17
-565U14*Put_Line 23|79s57 91s25 186s33
-X 23 ctlr.adb
-24U11*ctlr 24b11 268l5 268t9
-28r9 Full_Data{17|105R9} 78m57 78r70 79r78
-30a9 arg1{string} 31r46 104r18 105r80
-31a9 RPM{12|54A9} 105m17 121r30 122r30 123r31 124r31 125r31
-32a9 arg2{string} 33r53
-33f9 DesiredFlow{float} 177r76
-35a9 EndPrompt{string} 244m27 246r20
-36i9 EndPromptLength{natural} 244m38
-38A17 Message{12|54A9}<12|44I9> 42r19
-42a9 Buffer{38A17} 232m28 237r51
-43i9 Last{12|44I9} 233m26 236r31
-45i9 S_Port{natural} 110r115
-46a9 Temp_File{string} 64r52 72r66
-48b10 Stop{boolean} 49r25 62r35 181r51 252m34
-51t15 CSV_Task 52b20 96l15 96t23
-53i17 Exit_Code{integer} 59m17 90r20
-54a17 Args{45|749A12} 59r138
-55i17 Last_Line{natural} 77r64 84m41
-66p41 CSV_File{20|67P9} 72m47 72r47 74r64 75r59 83m48 83r48
-67a41 CSV_Line{string} 75m69 78r103
-68i41 CSV_Len{natural} 75m79 78r118
-69i41 Curr_Line{natural} 76m49 76r62 77r52 84r54
-70a41 LF{string} 78r151
-98p11 StopFile{20|67P9} 248m42 248r42 250m41 250r41
+76K13*Directories 524e20 25|21w10 65r32 306r21
+147U14*Delete_File 25|306s33
+310V13*Exists{boolean} 25|65s44
+X 10 a-flteio.ads
+20K13*Float_Text_IO[22|46] 25|22w10 79r61
+X 13 a-stream.ads
+36K13*Streams 90e16 25|17w10 26r17
+42M9*Stream_Element 25|105r51 211r96 278r30
+44I9*Stream_Element_Offset<long_long_integer> 25|44r19 105r22 211r67
+54A9*Stream_Element_Array(42M9)<44I9> 25|30r19 39r28 113r35 131r52 138r44
+. 148r52 157r52 188r67
+X 21 a-textio.ads
+58K13*Text_IO 785e16 25|16w10 16r27
+67P9*File_Type 25|67r59 98r27
+69n23*In_File{69E9} 25|72r57
+69n32*Out_File{69E9} 25|289r52
+99U14*Create 25|289s34
+115U14*Open 25|72s41
+131U14*Close 25|83s41 291s34
+284U14*New_Line 25|279s25
+341V13*End_Of_File{boolean} 25|74s51
+515U14*Put 25|278s25 284s17
+521U14*Get_Line 25|75s49
+535U14*Get_Line 25|285s17
+565U14*Put_Line 25|91s25
+X 22 a-tiflio.ads
+88U14*Put 25|79s75[10|20]
+X 25 ctlr.adb
+25U11*ctlr 25b11 309l5 309t9
+29a9 arg1{string} 30r46 104r18 105r80
+30a9 RPM{13|54A9} 105m17 121r30 122r30 123r31 124r31 125r31
+31a9 arg2{string} 32r53
+32f9 DesiredFlow{float} 177r85
+34a9 EndPrompt{string} 285m27 287r20
+35i9 EndPromptLength{natural} 285m38
+36f9 Data{float} 78m57 79r80 178r85
+39A17 Message{13|54A9}<13|44I9> 43r19
+43a9 Buffer{39A17} 273m28 278r51
+44i9 Last{13|44I9} 274m26 277r31
+46i9 S_Port{natural} 110r115
+47a9 Temp_File{string} 65r52 72r66
+49b10 Stop{boolean} 50r25 63r35 193r51 293m34
+52t15 CSV_Task 53b20 96l15 96t23
+54i17 Exit_Code{integer} 60m17 90r20
+55a17 Args{48|749A12} 60r138
+56i17 Last_Line{natural} 77r64 84m41
+67p41 CSV_File{21|67P9} 72m47 72r47 74r64 75r59 83m48 83r48
+68a41 CSV_Line{string} 75m69 78r78
+69i41 CSV_Len{natural} 75m79 78r93
+70i41 Curr_Line{natural} 76m49 76r62 77r52 84r54
+98p11 StopFile{21|67P9} 289m42 289r42 291m41 291r41
 104i13 I{integer} 105r44 105r85
-110a17 Port_Name{26|93A9} 197r27
-111r17 Port{26|125R9} 196m27 200r32 207m29 207r29 213m29 213r29 219m29 219r29
-. 225m29 225r29 231m26 231r26 255m45 255r45 263m34 263r34
-113a17 ControlInput{12|54A9} 220r29
-131a17 Enquiry{12|54A9} 208r29
-138a17 Numeration{12|54A9} 214r29
-148a17 StatusCheck{12|54A9} 226r29
-157a17 StopSignal{12|54A9} 256r45
-166T27 ControlUpdate 168l21 168e34 170b27 188l21 188t34 190r35
-167Y31 ControlBegin 172b32 241s28
-174f41 K_Proportional{float}
-175f41 K_Integral{float}
-176f41 K_Derivative{float}
-177f41 Q_Desired{float}
-178f41 Q_Actual{float}
-190t18 PumpUpdate{166T27} 241r17
-236i21 I<long_long_integer> 237r58
-X 24 gnat.ads
-40K9*GNAT 23|18r6 20r6 26r13 54r35 59r30 24|63e9
-X 25 g-os_lib.ads
-51K14*OS_Lib=51:36 23|20w11 54r40 59r35
-X 26 g-sercom.ads
-38K14*Serial_Communications 23|18w11 110r52 110r87 111r43 195r17 199r17 201r32
-. 202r32 203r32 204r32 206r17 212r17 218r17 224r17 230r17 254r34 262r17 26|225e31
-93A9*Port_Name<string>(character)<integer> 23|110r74
-96V13*Name{93A9} 23|110s109
-105n14*B4800{103E9} 23|201r54
-113n28*CS7{113E9} 23|202r54
-116n30*One{116E9} 23|203r54
-119n38*Odd{119E9} 23|204r54
-125R9*Serial_Port<12|39R9> 23|111r65 26|192e14
-132U14*Open 23|195s39
-133r7 Port{125R9} 23|196r19
-134a7 Name{93A9} 23|197r19
-138U14*Set 23|199s39
-139r7 Port{125R9} 23|200r19
-140e7 Rate{103E9} 23|201r19
-141e7 Bits{113E9} 23|202r19
-142e7 Stop_Bits{116E9} 23|203r19
-143e7 Parity{119E9} 23|204r19
-160U25*Read<12|57p14> 23|230s39
-161r7 Port{125R9} 23|231r18
-162a7 Buffer{12|54A9} 23|232r18
-163i7 Last{12|44I9} 23|233r18
-169U25*Write<12|63p14> 23|206s39 212s39 218s39 224s39 254s56
-170r7 Port{125R9} 23|207r19 213r19 219r19 225r19 255r35
-171a7 Buffer{12|54A9} 23|208r19 214r19 220r19 226r19 256r35
-174U14*Close 23|262s39
-174r21 Port{125R9} 23|263r26
-X 31 system.ads
-67M9*Address
-X 41 s-memory.ads
-51V13*Alloc{31|67M9} 101i<c,__gnat_malloc>22
-66U14*Free 102i<c,__gnat_free>22
-74V13*Realloc{31|67M9} 103i<c,__gnat_realloc>22
-X 45 s-os_lib.ads
-71A12*String_List{59|52A9}<integer>
-749A12*Argument_List{71A12}<integer> 23|54r47
-912V13*Spawn{integer} 23|59s42
-913a7 Program_Name{string} 23|59r49
-914a7 Args{749A12} 23|59r130
-X 54 s-stausa.ads
+110a17 Port_Name{28|93A9} 238r27
+111r17 Port{28|125R9} 222m61 222r61 237m27 241r32 248m29 248r29 254m29 254r29
+. 260m29 260r29 266m29 266r29 272m26 272r26 296m45 296r45 304m34 304r34
+113a17 ControlInput{13|54A9} 215m41 216m41 217m41 218m41 219m41 223r61 261r29
+131a17 Enquiry{13|54A9} 249r29
+138a17 Numeration{13|54A9} 255r29
+148a17 StatusCheck{13|54A9} 267r29
+157a17 StopSignal{13|54A9} 297r45
+166T27 ControlUpdate 168l21 168e34 170b27 229l21 229t34 231r35
+167Y31 ControlBegin 172b32 282s28
+174f41 K_Proportional{float} 199r69
+175f41 K_Integral{float} 199r98
+176f41 K_Derivative{float} 199r124
+177f41 Q_Desired{float} 195r68
+178f41 Q_Actual{float} 195r80
+179f41 D_Smooth{float} 197r68 197r103
+180f41 T{float} 194r78 196r80 197r126
+181o41 T_Delay{duration} 194m41 225r47
+182f41 delta_Q{float} 195m41 196r84 197r115 199r86
+183f41 Integral{float} 196m41 196r68 199r111
+184f41 Derivative{float} 197m41 199r139 201r60
+185f41 Previous_Der{float} 197r79 201m41
+186f41 Out_RPM{float} 199m41 204r44 205m49 208r60
+187a41 New_RPM{string} 208m41 211r126
+188a41 Sent_RPM{13|54A9} 211m57 215r68 216r68 217r68 218r68 219r68
+210i45 I{integer} 211r89 211r134
+231t17 PumpUpdate{166T27} 282r17
+277i21 I<long_long_integer> 278r58
+X 26 gnat.ads
+40K9*GNAT 25|18r6 20r6 27r13 55r35 60r30 26|63e9
+X 27 g-os_lib.ads
+51K14*OS_Lib=51:36 25|20w11 55r40 60r35
+X 28 g-sercom.ads
+38K14*Serial_Communications 25|18w11 110r52 110r87 111r43 221r41 236r17 240r17
+. 242r32 243r32 244r32 245r32 247r17 253r17 259r17 265r17 271r17 295r34 303r17
+. 28|225e31
+93A9*Port_Name<string>(character)<integer> 25|110r74
+96V13*Name{93A9} 25|110s109
+105n14*B4800{103E9} 25|242r54
+113n28*CS7{113E9} 25|243r54
+116n30*One{116E9} 25|244r54
+119n38*Odd{119E9} 25|245r54
+125R9*Serial_Port<13|39R9> 25|111r65 28|192e14
+132U14*Open 25|236s39
+133r7 Port{125R9} 25|237r19
+134a7 Name{93A9} 25|238r19
+138U14*Set 25|240s39
+139r7 Port{125R9} 25|241r19
+140e7 Rate{103E9} 25|242r19
+141e7 Bits{113E9} 25|243r19
+142e7 Stop_Bits{116E9} 25|244r19
+143e7 Parity{119E9} 25|245r19
+160U25*Read<13|57p14> 25|271s39
+161r7 Port{125R9} 25|272r18
+162a7 Buffer{13|54A9} 25|273r18
+163i7 Last{13|44I9} 25|274r18
+169U25*Write<13|63p14> 25|221s63 247s39 253s39 259s39 265s39 295s56
+170r7 Port{125R9} 25|222r51 248r19 254r19 260r19 266r19 296r35
+171a7 Buffer{13|54A9} 25|223r51 249r19 255r19 261r19 267r19 297r35
+174U14*Close 25|303s39
+174r21 Port{125R9} 25|304r26
+X 48 s-os_lib.ads
+71A12*String_List{61|52A9}<integer>
+749A12*Argument_List{71A12}<integer> 25|55r47
+912V13*Spawn{integer} 25|60s42
+913a7 Program_Name{string} 25|60r49
+914a7 Args{749A12} 25|60r130
+X 57 s-stausa.ads
 207U14*Initialize 208i<c,__gnat_stack_usage_initialize>22
 272U14*Output_Results 276i<c,__gnat_stack_usage_output_results>22
-X 56 s-stalib.adb
-87U14 Break_Start 88i<c,__gnat_break_start>22
-X 59 s-string.ads
+X 61 s-string.ads
 43P9*String_Access(string)
 52A9*String_List(43P9)<integer>
 

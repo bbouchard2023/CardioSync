@@ -12,21 +12,20 @@
 --
 --
 -- Created: 20260319
--- Last Edited: 20260407
+-- Last Edited: 20260409
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Streams;
 with GNAT.Serial_Communications;
 with Ada.Command_Line;
 with GNAT.OS_Lib;
 with Ada.Directories;
-with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+with Ada.Float_Text_IO;
+
 
 procedure ctlr is
 	use Ada.Streams;
 	use GNAT;
-	
-	Full_Data	: Unbounded_String := Null_Unbounded_String; -- Used to store the whole .csv output from the ultrasound flow meter output for use in the PID
-	
+		
 	arg1	: constant String := Ada.Command_Line.Argument(1); -- Takes the first argument from the command line when executed (RPM)
 	RPM 	: Stream_Element_Array (1 .. arg1'Length);	-- Defines the stream element array for the RPM to be input into ControlInput
 	arg2	: constant String := Ada.Command_Line.Argument(2);
@@ -34,6 +33,8 @@ procedure ctlr is
 	
 	EndPrompt		: String (1 .. 3); -- preallocates the end prompt
 	EndPromptLength : Natural; -- defines the length of the end prompt as a number
+	Data			: Float;
+
 
 	subtype Message is Stream_Element_Array (1 .. 11); -- Defines a stream element array subtype for reading the buffer in the Serial_Communications.Read call
 	
@@ -67,7 +68,6 @@ procedure ctlr is
 					CSV_Line	: String (1 .. 200); -- preallocates each line 
 					CSV_Len		: Natural; -- predefines the length of each line as a number
 					Curr_Line	: Natural := 0; -- defines the current line, starting at 0
-					LF			: constant String := ASCII.LF & ""; -- creates a string for the "\n" at the end of each line in Full_Data
 				begin
 					Open (CSV_File, In_File, Temp_File); -- opens the temp file
 					
@@ -75,8 +75,8 @@ procedure ctlr is
 						Get_Line (CSV_File, CSV_Line, CSV_Len); -- gets the line from the temp csv
 						Curr_Line := Curr_Line + 1; -- increases the current line to get the next line
 						if Curr_Line > Last_Line then -- checks if the current line is greater than the last line in the file (if read from same file more than once)
-							Full_Data := Full_Data & To_Unbounded_String (CSV_Line (1 .. CSV_Len)) & To_Unbounded_String (LF); -- concatenates Full_Data and the current line (\n at the end)
-							Put_Line (To_String (Full_Data)); -- prints the entire Full_Data variable
+							Data := Float'Value (CSV_Line (1 .. CSV_Len)); -- changes input string from csv to a float value
+							Ada.Float_Text_IO.Put (Data); -- prints the entire Full_Data variable
 						end if;
 					end loop;
 					
@@ -110,7 +110,7 @@ begin
 		Port_Name 		: constant Serial_Communications.Port_Name := Serial_Communications.Name (S_Port); -- Defines the serial port name
 		Port      		: Serial_Communications.Serial_Port; -- Defines Serial_Port from the Serial_Communications package as "Port"
 		
-		ControlInput   	: constant Stream_Element_Array  := ( -- Sets control parameters
+		ControlInput   	: Stream_Element_Array  := ( -- Sets control parameters
 			1 => 16#02#, -- STX (start text)
 			2 => 16#50#, -- P
 			3 => 16#30#, -- 0
@@ -171,23 +171,64 @@ begin
 		begin
 			accept ControlBegin;
 			declare
-					K_Proportional	: Float := 1.0;
-					K_Integral		: Float := 1.0;
-					K_Derivative	: Float := 1.0;
-					Q_Desired		: Float := DesiredFlow;
-					Q_Actual		: Float;
+					K_Proportional	: constant Float := 1.0; -- proportional term tuning coefficient (Kp)
+					K_Integral		: constant Float := 1.0; -- integral term tuning coefficient (Ki)
+					K_Derivative	: constant Float := 1.0; -- derivative term tuning coefficient (Kd)
+					Q_Desired		: constant Float := DesiredFlow; -- desired flow rate (Q*)
+					Q_Actual		: constant Float := Data; -- actual flow rate (Q(t))
+					D_Smooth		: constant Float := 1.0; -- derivative smoothing factor
+					T				: constant Float := 0.25; -- sampling time
+					T_Delay			: Duration;
+					delta_Q			: Float; -- Q_Desired - Q_Actual
+					Integral		: Float := 0.0; -- integral term
+					Derivative		: Float := 0.0; -- derivative term
+					Previous_Der	: Float := 0.0; -- previous derivative
+					Out_RPM			: Float := 0.0; -- RPM adjustment
+					New_RPM			: String (1 .. 5); -- preallocates string for use in Stream_Element
+					Sent_RPM		: Stream_Element_Array (1 .. 5); -- RPM sent to pump
+					
+					
 			begin	
 				loop
 					exit when Stop;
+					T_Delay  		:= Duration (T); -- duration used for delay
+					delta_Q			:= Q_Desired - Q_Actual; -- difference between desired flow rate and actual flow rate
+					Integral		:= Integral + (T * delta_Q); -- integral term of the equation
+					Derivative		:= D_Smooth * Previous_Der * (((1.0 - D_Smooth) * delta_Q) / T); -- derivative term of the equation
+					
+					Out_RPM			:= (K_Proportional * delta_Q) + (K_Integral * Integral) + (K_Derivative * Derivative); -- gives the new RPM as a float
+					
+					Previous_Der	:= Derivative; -- defines this derivative for use in the next iteration
 					
 					
+					if Out_RPM > 600.0 then
+						Out_RPM := 600.0; -- sets the RPM to 600 if calculation exceeds that (SAFETY: DO NOT REMOVE)
+					end if;
+					
+					New_RPM		:= Out_RPM'Image; -- changes to string for use in Stream_Element
+										
+					for I in 1 .. 5 loop
+							Sent_RPM (Stream_Element_Offset(I)) := Stream_Element (Character'Pos(New_RPM(I))); -- Transforms String type from the first argument to Stream_Element type
+					end loop;
+					
+					-- updates control input with new RPM value
+					ControlInput (8)	:= Sent_RPM (1);
+					ControlInput (9)	:= Sent_RPM (2);
+					ControlInput (10)	:= Sent_RPM (3);
+					ControlInput (11)	:= Sent_RPM (4);
+					ControlInput (12)	:= Sent_RPM (5);
+							
+					Serial_Communications.Write -- Sets the control input (RPM, # revs, etc)
+						 (Port   => Port,
+						  Buffer => ControlInput);
+					
+					delay(T_Delay);
 					
 				end loop;
-				Put_Line ("It works");
 			end;
 		end ControlUpdate;
 		 
-		 PumpUpdate	: ControlUpdate;
+		PumpUpdate	: ControlUpdate;
 		  
 	begin
 		
