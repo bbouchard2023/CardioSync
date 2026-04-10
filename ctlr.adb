@@ -186,9 +186,12 @@ begin
 					Out_RPM			: Float := 0.0; -- RPM adjustment
 					New_RPM			: String (1 .. 5); -- preallocates string for use in Stream_Element
 					Sent_RPM		: Stream_Element_Array (1 .. 5); -- RPM sent to pump
+					RPM_Out_File	: File_Type;
 					
-					
-			begin	
+			begin
+				
+				Create (RPM_Out_File, Out_File, "D:/CardioSync/front-end/Data/rpmoutput.csv");
+				
 				loop
 					exit when Stop;
 					T_Delay  		:= Duration (T); -- duration used for delay
@@ -206,6 +209,9 @@ begin
 					end if;
 					
 					New_RPM		:= Out_RPM'Image; -- changes to string for use in Stream_Element
+					
+					Put (RPM_Out_File, New_RPM);
+					Put (RPM_Out_File, ",");
 										
 					for I in 1 .. 5 loop
 							Sent_RPM (Stream_Element_Offset(I)) := Stream_Element (Character'Pos(New_RPM(I))); -- Transforms String type from the first argument to Stream_Element type
@@ -225,6 +231,8 @@ begin
 					delay(T_Delay);
 					
 				end loop;
+				
+				Close (RPM_Out_File);
 			end;
 		end ControlUpdate;
 		 
