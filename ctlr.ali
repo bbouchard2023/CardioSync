@@ -22,7 +22,7 @@ RV NO_DYNAMIC_SIZED_OBJECTS
 RV MAX_TASK_ENTRIES=1
 RV MAX_TASKS=1+
 
-U ctlr%b		ctlr.adb		d5913406 NE OO SU IL
+U ctlr%b		ctlr.adb		422bf5d8 NE OO SU IL
 W ada%s			ada.ads			ada.ali
 Z ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 W ada.command_line%s	a-comlin.adb		a-comlin.ali
@@ -72,7 +72,7 @@ D a-textio.ads		20250425081800 34ef47de ada.text_io%s
 D a-tiflio.ads		20250425081800 48a0360d ada.text_io.float_io%s
 D a-unccon.ads		20250425081800 0e9b276f ada.unchecked_conversion%s
 D a-uncdea.ads		20250425081800 c3a8ac65 ada.unchecked_deallocation%s
-D ctlr.adb		20260410142832 434592b2 ctlr%b
+D ctlr.adb		20260420145152 d4ff536c ctlr%b
 D gnat.ads		20250425081800 b5988c27 gnat%s
 D g-os_lib.ads		20250425081800 0db74523 gnat.os_lib%s
 D g-sercom.ads		20250425081800 55997d9d gnat.serial_communications%s

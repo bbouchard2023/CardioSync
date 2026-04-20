@@ -116,7 +116,7 @@ begin
 			3 => 16#30#, -- 0
 			4 => 16#31#, -- 1
 			5 => 16#53#, -- S (speed)
-			6 => 16#2B#, -- + (clockwise rotation)
+			6 => 16#2D#, -- - (counterclockwise rotation)
 			7 => 16#30#, -- 0
 			8 => RPM (1), -- input digit 1
 			9 => RPM (2), -- input digit 2
