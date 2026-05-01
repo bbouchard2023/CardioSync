@@ -189,10 +189,15 @@ begin
 					RPM_Out_File	: File_Type;
 					
 			begin
-				
-				Create (RPM_Out_File, Out_File, "D:/CardioSync/front-end/Data/rpmoutput.csv");
+				begin
+					Open (RPM_Out_File, Append_File, "D:/CardioSync/front-end/Data/rpmoutput.csv");
+				exception
+					when Name_Error | Use_Error =>
+						Create (RPM_Out_File, Out_File, "D:/CardioSync/front-end/Data/rpmoutput.csv");
+				end;
 				
 				loop
+					
 					exit when Stop;
 					T_Delay  		:= Duration (T); -- duration used for delay
 					delta_Q			:= Q_Desired - Q_Actual; -- difference between desired flow rate and actual flow rate
@@ -231,8 +236,8 @@ begin
 					delay(T_Delay);
 					
 				end loop;
-				
 				Close (RPM_Out_File);
+				
 			end;
 		end ControlUpdate;
 		 
@@ -240,6 +245,7 @@ begin
 		  
 	begin
 		
+		PumpUpdate.ControlBegin;
 		
 		Serial_Communications.Open -- Opens the serial port
 		 (Port => Port,
@@ -287,7 +293,7 @@ begin
 			New_Line;
 		end	loop;
 		
-		PumpUpdate.ControlBegin;
+		
 				
 		Put ("Type 'end' to end program: ");
 		Get_Line (EndPrompt, EndPromptLength);
